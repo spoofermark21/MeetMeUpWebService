@@ -39,14 +39,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 						$status['response'] = "Successful.";
 						$status['user'] = $user_info;
 					}
-				} /*else if($type_login == 'out') {
-					$str_query = "UPDATE meetmeup.user_logs SET logout_date = NOW() WHERE user_id = ". $username;
-					if($con->query($str_query)) {
-						$status['status'] = 1;
-						$status['response'] = "Successful";
-						$status['user'] = $user_info;
-					}
-				}*/
+				} 
 			}
 		} else {
 			$status['status'] = 0;
