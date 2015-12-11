@@ -5,15 +5,12 @@ include "class/user.php";
 
 $status = array();
 
-/* 
-	Mark D. Sibi
-*/
 
 $status['status'] = "0";
 $status['response'] = "Unsuccessful";
 
 
-if (isset($_POST)) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
 	$db = new Database();
 
 	$con = $db->connect();
@@ -23,7 +20,7 @@ if (isset($_POST)) {
 		$_POST['birth_date'], $_POST['natio_id'], $_POST['gender'], $_POST['current_location'], $_POST['email_address'], 
 		$_POST['contact_number'], $_POST['file_name']);
 	
-	/*
+	/* for testing purposes
 	$user = new User('marksibi', 'marksibi', 'mark', 'sibi', 
 		'2015-10-1', 19, 'M', 'Mandaue', 'sibi.mark21@gmail.com', 0932905488,
 		'mark');

@@ -7,7 +7,7 @@ class Database {
 	private $server = 'localhost';
 	private $user = 'root';
 	private $password = '';
-	private $database = 'buddies';
+	private $database = 'meetmeup';
 
 	function connect() {
 		$this->con = new mysqli($this->server, $this->user, $this->password, $this->database);
