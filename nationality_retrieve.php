@@ -28,15 +28,11 @@ if (isset($_POST)) {
 			$nationality['nationality'] = $natio->nationality;
 			
 			array_push($status['nationality'], $nationality);
-
-			
-
 		}
 		$status['status'] = "1";
 		$status['response'] = "Successful";
 	} 
 
 }
-
 
 echo json_encode($status);

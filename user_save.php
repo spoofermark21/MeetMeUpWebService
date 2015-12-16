@@ -11,14 +11,26 @@ $status['response'] = "Unsuccessful";
 
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
+	
 	$db = new Database();
-
 	$con = $db->connect();
 
-	
+	/*
 	$user = new User($_POST['username'], $_POST['password'], $_POST['first_name'], $_POST['last_name'], 
 		$_POST['birth_date'], $_POST['natio_id'], $_POST['gender'], $_POST['current_location'], $_POST['email_address'], 
-		$_POST['contact_number'], $_POST['file_name']);
+		$_POST['contact_number'], $_POST['file_name']);*/
+
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$first_name = $_POST['first_name'];
+	$last_name = $_POST['last_name']; 
+	$birth_date = $_POST['birth_date'];
+	$natio_id = $_POST['natio_id'];
+	$gender = $_POST['gender'];
+	$current_location = $_POST['current_location'];
+	$email_address = $_POST['email_address']; 
+	$contact_number = $_POST['contact_number'];
+	$file_name = $_POST['file_name'];
 	
 	/* for testing purposes
 	$user = new User('marksibi', 'marksibi', 'mark', 'sibi', 
@@ -40,10 +52,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 						natio_id, gender, current_location, email_address,
 						contact_number, user_image,date_registered) 
 					VALUES
-						('$user->username', '$user->password', '$user->first_name', '$user->last_name',
-						 '$user->birth_date', $user->natio_id, '$user->gender', 
-						 '$user->current_location', '$user->email_address', $user->contact_number, 
-						 '$user->user_image', NOW())";
+						('$username', '$password', '$first_name', '$last_name',
+						 '$birth_date', $natio_id, '$gender', 
+						 'current_location', '$email_address', $contact_number, 
+						 '$file_name', NOW())";
 
 			if ($con->query($str_query)) {
 				$status['status'] = "1";

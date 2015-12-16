@@ -45,11 +45,11 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 						$status['response'] = "Successful";
 						$status['user'] = $user_info;
 					}
-				} 
+				}
 			}
 		} else {
 			$status['status'] = 0;
-			$status['response'] = "Username or Password is incorrect";
+			$status['response'] = "Username or Password is incorrect.";
 		}
 	}
 }
