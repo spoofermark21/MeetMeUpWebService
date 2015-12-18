@@ -18,13 +18,16 @@ if (isset($_POST)) {
 
 	//$type = $_POST['user_info'];
 	//$user_id = $_POST['user_id'];
+
 	$type = 'current_user';
-	$user_id = 31;
+	$user_id = $_POST['user_id'];
 
 	if($type == 'current_user') {
 		$str_query = 	"SELECT *
 							FROM meetmeup.users
 							WHERE id = $user_id";
+	} else if ($type == 'friend_user') {
+		$str_query = "";
 	}
 	
 
@@ -36,7 +39,10 @@ if (isset($_POST)) {
 			$status['user'] = array();
 			while ($user = $result->fetch_object()) {
 				$user_info = array();
+
 				$user_info['id'] = $user->id;
+				$user_info['username'] = $user->username;
+				$user_info['password'] = $user->password;
 				$user_info['first_name'] = $user->first_name;
 				$user_info['last_name'] = $user->last_name;
 				$user_info['bdate'] = $user->bdate;

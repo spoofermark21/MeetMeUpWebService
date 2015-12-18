@@ -10,7 +10,7 @@ $status['status'] = "0";
 $status['response'] = "Unsuccessful";
 
 
-if (isset($_POST['username']) && isset($_POST['password'])) {
+if (isset($_POST)) {
 	
 	$db = new Database();
 	$con = $db->connect();
@@ -19,7 +19,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$user = new User($_POST['username'], $_POST['password'], $_POST['first_name'], $_POST['last_name'], 
 		$_POST['birth_date'], $_POST['natio_id'], $_POST['gender'], $_POST['current_location'], $_POST['email_address'], 
 		$_POST['contact_number'], $_POST['file_name']);*/
-
+	$id = $_POST['id'];
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$first_name = $_POST['first_name'];
@@ -41,31 +41,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$natio_id = $_POST['natio_id'];
 	$file_name = $_POST['file_name'];
 	*/
-	$str_query = "SELECT * FROM meetmeup.users WHERE username = '$user->username'";
+	$str_query = 	"UPDATE meetmeup.users 
+						SET PASSWORD='$password', first_name='$first_name', last_name='$last_name', bdate='$birth_date', natio_id=$natio_id, gender='$gender', current_location='$current_location',email_address='$email_address', contact_number=$contact_number
+					WHERE id = $id";
+
 
 	if ($result = $con->query($str_query)) {
 		
 		if ($result->num_rows == 0) {
-
-			$str_query = 	"INSERT INTO meetmeup.users
-						(username, password, first_name, last_name, bdate, 
-						natio_id, gender, current_location, email_address,
-						contact_number, user_image,date_registered) 
-					VALUES
-						('$username', '$password', '$first_name', '$last_name',
-						 '$birth_date', $natio_id, '$gender', 
-						 '$current_location', '$email_address', $contact_number, 
-						 '$file_name', NOW())";
-
-			if ($con->query($str_query)) {
-				$status['status'] = "1";
-				$status['response'] = "Successful";
-			}
-
-		} else {
-			$status['response'] = "Username is already taken. Please try again.";
-		}
-
+			$status['status'] = "1";
+			$status['response'] = "Successful";
+		} 
 	} 
 
 }
