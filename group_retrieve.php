@@ -13,11 +13,21 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 
-	$user_id = $_POST['user_id'];
+	$id = $_POST['id'];
+	$query_type = $_POST['query_type'];
 
-	$str_query = "SELECT g.* 
+	$str_query = "";
+
+	if($query_type == 'all') {
+		$str_query = "SELECT g.* 
 				FROM meetmeup.groups g
-				WHERE g.created_by = $user_id";
+				WHERE g.created_by = $id";
+	} else if ($query_type == 'individual') {
+		$str_query = "SELECT g.* 
+				FROM meetmeup.groups g
+				WHERE g.id = $id";
+	}
+	
 
 	if ($result = $con->query($str_query)) {
 
@@ -39,6 +49,16 @@ if (isset($_POST)) {
 				$group_info['active_flag'] = $group->active_flag;
 				$group_info['group_image'] = $group->group_image;
 
+				$query_members = "SELECT COUNT(*) members
+									FROM meetmeup.group_members 
+									WHERE group_id = $group->id";
+
+				if($result1 = $con->query($query_members)){
+					while($count = $result1->fetch_object()) {
+						$group_info['count_members'] = $count->members;
+					}
+				}
+				
 				array_push($status['group'], $group_info);
 			}
 		} else {

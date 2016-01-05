@@ -19,7 +19,7 @@ if (isset($_POST)) {
 	if($query_type == 'all') {
 		$str_query = "SELECT m.*
 					FROM meetmeup.meetups m
-					WHERE m.posted_by = $user_id";
+					WHERE m.posted_by = $user_id and m.active_flag = 'A'";
 	} else {
 		$str_query = "SELECT m.*
 					FROM meetmeup.meetups m
@@ -39,8 +39,9 @@ if (isset($_POST)) {
 				$meetups_info = array();
 
 				$meetups_info['id'] = $meetups->id;
-				$meetups_info['key'] = $meetups->key;
+				$meetups_info['key'] = $meetups->pass_key;
 				$meetups_info['posted_by'] = $meetups->posted_by;
+				$meetups_info['subject'] = $meetups->subject;
 				$meetups_info['details'] = $meetups->details;
 				$meetups_info['location'] = $meetups->location;
 				$meetups_info['posted_date'] = $meetups->posted_date;

@@ -1,0 +1,22 @@
+{
+    "feed": [
+        {
+            "id": 1,
+            "name": "National Geographic Channel",
+            "image": "http://localhost/meetmeup/meetmeup/sample1.JPG",
+            "status": "\"Science is a beautiful and emotional human endeavor,\" says Brannon Braga, executive producer and director. \"And Cosmos is all about making science an experience.\"",
+            "profilePic": "http://localhost/meetmeup/meetmeup/sample2.JPG",
+            "timeStamp": "1403375851930",
+            "url": null
+        },
+        {
+            "id": 2,
+            "name": "TIME",
+            "image": "http://localhost/meetmeup/meetmeup/sample1.JPG",
+            "status": "30 years of Cirque du Soleil's best photos",
+            "profilePic": "http://localhost/meetmeup/meetmeup/sample3.JPG",
+            "timeStamp": "1403375851930",
+            "url": "null"
+        }
+    ]
+}

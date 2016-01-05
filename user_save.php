@@ -54,7 +54,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 					VALUES
 						('$username', '$password', '$first_name', '$last_name',
 						 '$birth_date', $natio_id, '$gender', 
-						 '$current_location', '$email_address', $contact_number, 
+						 '$current_location', '$email_address', '$contact_number', 
 						 '$file_name', NOW())";
 
 			if ($con->query($str_query)) {

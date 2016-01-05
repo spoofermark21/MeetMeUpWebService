@@ -13,17 +13,18 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 
-	$user_id = $_POST['user_id'];
+	$id = $_POST['id'];
 	$query_type = $_POST['filter'];
 
 	if($query_type == 'all') {
 		$str_query = "SELECT e.*
 						FROM meetmeup.events e
-						WHERE e.posted_by = $user_id";
-	} else {
+						WHERE e.posted_by = $id AND e.active_flag = 'A'
+						ORDER BY e.posted_date DESC";
+	} else if ($query_type == 'individual'){
 		$str_query = "SELECT e.*
 						FROM meetmeup.events e
-						WHERE e.id = $user_id";
+						WHERE e.id = $id";
 	}
 	
 
@@ -41,7 +42,7 @@ if (isset($_POST)) {
 				$events_info['id'] = $events->id;
 				$events_info['event_name'] = $events->event_name;
 				$events_info['event_type'] = $events->event_type;
-				$events_info['key'] = $events->key;
+				$events_info['key'] = $events->pass_key;
 				$events_info['details'] = $events->details;
 				$events_info['location'] = $events->location;
 				$events_info['start_date'] = $events->start_date;

@@ -15,23 +15,35 @@ if (isset($_POST)) {
 	$db = new Database();
 	$con = $db->connect();
 
-	$id = $_POST['id'];
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$first_name = $_POST['first_name'];
-	$last_name = $_POST['last_name']; 
-	$birth_date = $_POST['birth_date'];
-	$natio_id = $_POST['natio_id'];
-	$gender = $_POST['gender'];
-	$current_location = $_POST['current_location'];
-	$email_address = $_POST['email_address']; 
-	$contact_number = $_POST['contact_number'];
-	$file_name = $_POST['file_name'];
 
+	$update_type = $_POST['update_type'];
+	$str_query = '';
+
+	if($update_type == 'profile') {
+		$id = $_POST['id'];
+		$first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name']; 
+		$birth_date = $_POST['birth_date'];
+		$natio_id = $_POST['natio_id'];
+		$gender = $_POST['gender'];
+		$current_location = $_POST['current_location'];
+		$email_address = $_POST['email_address']; 
+		$contact_number = $_POST['contact_number'];
+		//$file_name = $_POST['file_name'];
+
+		$str_query = 	"UPDATE meetmeup.users 
+						SET last_name='$last_name',first_name='$first_name', bdate='$birth_date', natio_id=$natio_id, gender='$gender', current_location='$current_location',email_address='$email_address', contact_number='$contact_number'
+						WHERE id = $id";
+
+	} else if($update_type == 'password') {
+		$id = $_POST['id'];
+		$password = $_POST['password'];
+		$str_query = 	"UPDATE meetmeup.users 
+						SET PASSWORD='$password'
+						WHERE id = $id";
+	}
 	
-	$str_query = 	"UPDATE meetmeup.users 
-						SET PASSWORD='$password', first_name='$first_name', last_name='$last_name', bdate='$birth_date', natio_id=$natio_id, gender='$gender', current_location='$current_location',email_address='$email_address', contact_number=$contact_number
-					WHERE id = $id";
+	
 
 
 	if ($result = $con->query($str_query)) {
