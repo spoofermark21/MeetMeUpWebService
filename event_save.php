@@ -25,11 +25,11 @@ if (isset($_POST)) {
 
 	$random_key = generateRandomKey(10);
 
-	$str_query = 	"INSERT INTO meetmeup.events 
+
+	$str_query = 	"INSERT INTO events 
 					(event_name, event_type, pass_key, details, location, start_date, end_date, posted_date, posted_by, posted_by_type, avail_status, active_flag)
 					VALUES 
 					('$event_name', '$event_type', '$random_key', '$details', '$location', '$start_date', '$end_date', NOW(), $user_id, 'U', 'A', 'A');";
-
 
 	if ($result = $con->query($str_query)) {
 		$status['status'] = "1";

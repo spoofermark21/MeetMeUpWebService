@@ -21,7 +21,7 @@ if (isset($_POST)) {
 	$gender = $_POST['gender'];
 	$location = $_POST['location'];
 
-	$str_query = 	"UPDATE meetmeup.users
+	$str_query = 	"UPDATE users
 						SET pref_start_age = $min_age, pref_end_age = $max_age, pref_gender = '$gender', pref_location = '$location'
 						WHERE id = $id";
 

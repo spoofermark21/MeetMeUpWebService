@@ -13,18 +13,33 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 
-	$user_id = $_POST['user_id'];
+	$id = $_POST['id'];
 	$query_type = $_POST['filter'];
 
 	if($query_type == 'all') {
 		$str_query = "SELECT m.*
-					FROM meetmeup.meetups m
-					WHERE m.posted_by = $user_id and m.active_flag = 'A'";
-	} else {
+					FROM meetups m
+					WHERE m.posted_by = $id and m.active_flag = 'A'";
+	} else if ($query_type == 'individual') {
 		$str_query = "SELECT m.*
-					FROM meetmeup.meetups m
-					WHERE id = $user_id";
-	}
+					FROM meetups m
+					WHERE m.id = $id";
+	} else if ($query_type == 'newsfeed') {
+		$user_id = $_POST['user_id'];
+		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, m.*
+						FROM meetups m
+						LEFT JOIN users u
+						ON  u.id = m.posted_by
+						WHERE m.active_flag = 'A' AND m.posted_by <> $user_id
+						ORDER BY m.posted_by
+						LIMIT 10";
+	} else if ($query_type == 'invidual_join_user') {
+		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, m.*
+						FROM meetups m
+						LEFT JOIN users u
+						ON  u.id = m.posted_by
+						WHERE m.id = $id AND m.posted_by <> $user_id";
+	} 
 	
 
 	if ($result = $con->query($str_query)) {
@@ -41,6 +56,12 @@ if (isset($_POST)) {
 				$meetups_info['id'] = $meetups->id;
 				$meetups_info['key'] = $meetups->pass_key;
 				$meetups_info['posted_by'] = $meetups->posted_by;
+				
+				if($query_type == 'invidual_join_user' || 
+					$query_type == 'newsfeed') {
+					$meetups_info['posted_by_user'] = $meetups->posted_by_user;
+				}
+				
 				$meetups_info['subject'] = $meetups->subject;
 				$meetups_info['details'] = $meetups->details;
 				$meetups_info['location'] = $meetups->location;

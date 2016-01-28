@@ -20,7 +20,7 @@ if (isset($_POST)) {
 	$query_type = $_POST['query_type'];
 
 	if($query_type == 'disable') {
-		$str_query = 	"UPDATE meetmeup.events
+		$str_query = 	"UPDATE events
 						SET active_flag = 'D'
 						WHERE id = $id";
 	} else if($query_type == 'update'){
@@ -31,7 +31,7 @@ if (isset($_POST)) {
 		$start_date = $_POST['start_date'];
 		$end_date = $_POST['end_date'];
 
-		$str_query = 	"UPDATE meetmeup.events 
+		$str_query = 	"UPDATE events 
 							SET event_name='$event_name', event_type='$type', details='$details', location='$location',
 								start_date='$start_date', end_date='$end_date' 
 							WHERE id=$id";

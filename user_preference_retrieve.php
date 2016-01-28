@@ -16,7 +16,7 @@ if (isset($_POST)) {
 	$user_id = $_POST['user_id'];
 
 	$str_query = 	"SELECT *
-						FROM meetmeup.users
+						FROM users
 						WHERE id = $user_id";
 
 	if ($result = $con->query($str_query)) {

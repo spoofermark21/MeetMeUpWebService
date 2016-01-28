@@ -18,13 +18,18 @@ if (isset($_POST)) {
 
 	if($query_type == 'all') {
 		$str_query = "SELECT e.*
-						FROM meetmeup.events e
+						FROM events e
 						WHERE e.posted_by = $id AND e.active_flag = 'A'
 						ORDER BY e.posted_date DESC";
 	} else if ($query_type == 'individual'){
 		$str_query = "SELECT e.*
-						FROM meetmeup.events e
+						FROM events e
 						WHERE e.id = $id";
+	} else if ($query_type == 'newsfeed') {
+		$str_query = "SELECT e.*
+						FROM events e
+						WHERE e.active_flag = 'A'
+						LIMIT 10";
 	}
 	
 

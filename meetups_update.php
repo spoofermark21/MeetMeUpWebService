@@ -20,21 +20,20 @@ if (isset($_POST)) {
 	$query_type = $_POST['query_type'];
 
 	if($query_type == 'disable') {
-		$str_query = "UPDATE meetmeup.meetups 
+		$str_query = "UPDATE meetups 
 						SET active_flag = 'D' 
 						WHERE id = $id";
-	} else if($query_type == 'update'){ /*
-		$event_name = $_POST['event_name'];
+	} else if($query_type == 'update'){		
+		$subject = $_POST['subject'];
 		$details = $_POST['details'];
 		$location = $_POST['location'];
-		$type = $_POST['type'];
-		$start_date = $_POST['start_date'];
-		$end_date = $_POST['end_date'];
+		$start_age = $_POST['start_age'];
+		$end_age = $_POST['end_age'];
+		$gender = $_POST['gender'];
 
-		$str_query = 	"UPDATE meetmeup.events 
-							SET event_name='$event_name', event_type='$type', details='$details', location='$location',
-								start_date='$start_date', end_date='$end_date' 
-							WHERE id=$id";*/
+		$str_query = 	"UPDATE meetups 
+							SET subject='$subject', details='$details', location='$location', pref_start_age=$start_age, pref_end_age=$end_age, pref_gender='$gender' 
+							WHERE id = $id";
 	}
 
 	if ($result = $con->query($str_query)) {

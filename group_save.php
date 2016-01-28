@@ -19,10 +19,12 @@ if (isset($_POST)) {
 	$group_name = $_POST['group_name'];
 	$details = $_POST['details'];
 
-	$str_query = 	"INSERT INTO meetmeup.groups 
+	$file_name = $_POST['file_name'];
+
+	$str_query = 	"INSERT INTO groups 
 						(group_name, details, created_by, created_date, avail_flag,active_flag, group_image)
 					VALUES
-						('$group_name','$details', $user_id , NOW(), 'A', 'Y', 'mark.png')";
+						('$group_name','$details', $user_id , NOW(), 'A', 'Y', '$file_name')";
 
 
 	if ($result = $con->query($str_query)) {
@@ -30,6 +32,16 @@ if (isset($_POST)) {
 		$status['response'] = "Successful";
 	} 
 
+}
+
+function generateRandomKey($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
 }
 
 

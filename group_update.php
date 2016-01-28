@@ -10,6 +10,7 @@ $status['status'] = "0";
 $status['response'] = "Unsuccessful";
 
 
+
 if (isset($_POST)) {
 	
 	$db = new Database();
@@ -18,9 +19,10 @@ if (isset($_POST)) {
 	$id = $_POST['id'];
 	$group_name = $_POST['group_name'];
 	$details = $_POST['details'];
+	$group_image = $_POST['group_image'];
 	
-	$str_query = 	"UPDATE meetmeup.groups 
-						SET group_name = '$group_name', details = '$details'
+	$str_query = 	"UPDATE groups 
+						SET group_name = '$group_name', details = '$details', group_image = '$group_image'
 						WHERE id = $id";
 
 

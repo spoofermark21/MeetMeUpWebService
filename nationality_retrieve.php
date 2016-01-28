@@ -15,7 +15,7 @@ if (isset($_POST)) {
 
 	$con = $db->connect();
 
-	$str_query = "SELECT * FROM meetmeup.nationalities";
+	$str_query = "SELECT * FROM nationalities";
 
 	if ($result = $con->query($str_query)) {
 		

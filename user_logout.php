@@ -15,7 +15,7 @@ if (isset($_POST['user_id'])) {
 	$user_id = $_POST['user_id'];
 	
 
-	$str_query = "UPDATE meetmeup.user_logs 
+	$str_query = "UPDATE user_logs 
 						SET logout_date = NOW() 
 					WHERE user_id = $user_id 
 						AND logout_date IS NULL";

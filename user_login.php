@@ -18,12 +18,12 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 	
 	//for testing
 	/*
-	$username = "iamroxan";
-	$password = "roxanmark";
+	$username = "";
+	$password = "";
 	$type_login = "in";
 */
 	$str_query = 	"SELECT *
-					FROM meetmeup.users
+					FROM users
 					WHERE username = '$username' AND password = '$password'";
 
 	if ($result = $con->query($str_query)) {
@@ -39,7 +39,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 					$user->date_registered); 
 				
 				if($type_login == 'in') {
-					$str_query = "INSERT INTO meetmeup.user_logs (user_id, login_date) VALUES (". $user->id .", NOW())";
+					$str_query = "INSERT INTO user_logs (user_id, login_date) VALUES (". $user->id .", NOW())";
 					if($con->query($str_query)) {
 						$status['status'] = 1;
 						$status['response'] = "Successful";

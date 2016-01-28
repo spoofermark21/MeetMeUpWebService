@@ -14,7 +14,7 @@ if (isset($_POST)) {
 
 
 	$str_query = 	"SELECT *
-					FROM meetmeup.users";
+					FROM users";
 
 	//$type = $_POST['user_info'];
 	//$user_id = $_POST['user_id'];
@@ -24,7 +24,7 @@ if (isset($_POST)) {
 
 	if($type == 'current_user') {
 		$str_query = 	"SELECT *
-							FROM meetmeup.users
+							FROM users
 							WHERE id = $user_id";
 	} else if ($type == 'friend_user') {
 		$str_query = "";

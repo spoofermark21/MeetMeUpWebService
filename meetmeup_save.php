@@ -24,7 +24,7 @@ if (isset($_POST)) {
 
 	$random_key = generateRandomKey(10);
 
-	$str_query = 	"INSERT INTO meetmeup.meetups 
+	$str_query = 	"INSERT INTO meetups 
 					(pass_key, posted_by, subject, details, location, posted_date, pref_start_age, pref_end_age, pref_gender, avail_status, active_flag)
 					VALUES
 					('$random_key', $user_id, '$subject', '$details','$location', NOW(), $start_age, $end_age, '$gender', 'A', 'A')";

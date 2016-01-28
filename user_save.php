@@ -41,13 +41,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$natio_id = $_POST['natio_id'];
 	$file_name = $_POST['file_name'];
 	*/
-	$str_query = "SELECT * FROM meetmeup.users WHERE username = '$user->username'";
+	$str_query = "SELECT * FROM users WHERE username = '$user->username'";
 
 	if ($result = $con->query($str_query)) {
 		
 		if ($result->num_rows == 0) {
 
-			$str_query = 	"INSERT INTO meetmeup.users
+			$str_query = 	"INSERT INTO users
 						(username, password, first_name, last_name, bdate, 
 						natio_id, gender, current_location, email_address,
 						contact_number, user_image,date_registered) 
