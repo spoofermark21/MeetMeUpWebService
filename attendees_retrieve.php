@@ -42,7 +42,7 @@ if (isset($_POST)) {
 				$attendees_info['accepted_date'] = $attendees->accepted_date;
 				$attendees_info['view_flag'] = $attendees->view_flag;
 
-				array_push($status['group'], $group_info);
+				array_push($status['attendees'], $attendees_info);
 			}
 		} else {
 			$status['status'] = 1;

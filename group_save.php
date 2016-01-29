@@ -24,7 +24,7 @@ if (isset($_POST)) {
 	$str_query = 	"INSERT INTO groups 
 						(group_name, details, created_by, created_date, avail_flag,active_flag, group_image)
 					VALUES
-						('$group_name','$details', $user_id , NOW(), 'A', 'Y', '$file_name')";
+						('$group_name','$details', $user_id , NOW(), 'A', 'A', '$file_name')";
 
 
 	if ($result = $con->query($str_query)) {

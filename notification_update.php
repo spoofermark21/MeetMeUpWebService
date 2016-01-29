@@ -5,6 +5,7 @@ include "class/user.php";
 
 $status = array();
 
+
 $status['status'] = "0";
 $status['response'] = "Unsuccessful";
 
@@ -14,18 +15,18 @@ if (isset($_POST)) {
 	$db = new Database();
 	$con = $db->connect();
 
-	$user_id = $_POST['user_id'];
+	$notif_id = $_POST['notif_id'];
+	/*$user_id = $_POST['user_id'];
 	$from_id = $_POST['from_id'];
 	$post_comment_id = $_POST['post_comment_id'];
-	$type = $_POST['type'];
-	$details = $_POST['details'];
+	$details = $_POST['details'];*/
 
-	$str_query = "INSERT INTO notifications (user_id, from_id, post_comment_id, TYPE, details, view_flag, date_notified) VALUES ($user_id,$from_id,$post_comment_id,'$type', '$details','N',NOW())";
-
+	$str_query = "UPDATE notifications SET view_flag = 'Y' WHERE id = $notif_id";
 
 	if ($result = $con->query($str_query)) {
-		$status['status'] = "1";
-		$status['response'] = "Successful";
+			$status['status'] = "1";
+			$status['response'] = "Successful";
+	
 	} 
 
 }

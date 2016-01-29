@@ -21,7 +21,7 @@ if (isset($_POST)) {
 	if($query_type == 'all') {
 		$str_query = "SELECT g.* 
 				FROM groups g
-				WHERE g.created_by = $id";
+				WHERE g.created_by = $id AND g.active_flag = 'A'";
 	} else if ($query_type == 'individual') {
 		$str_query = "SELECT g.* 
 				FROM groups g
@@ -29,6 +29,7 @@ if (isset($_POST)) {
 	} else if ($query_type == 'newsfeed') {
 		$str_query = "SELECT g.* 
 				FROM groups g
+				WHERE g.active_flag = 'A'
 				LIMIT 10";
 	}
 	

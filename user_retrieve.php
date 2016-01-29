@@ -19,7 +19,7 @@ if (isset($_POST)) {
 	//$type = $_POST['user_info'];
 	//$user_id = $_POST['user_id'];
 
-	$type = 'current_user';
+	$type = $_POST['type'];
 	$user_id = $_POST['user_id'];
 
 	if($type == 'current_user') {
