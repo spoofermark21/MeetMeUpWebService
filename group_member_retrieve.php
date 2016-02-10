@@ -13,13 +13,14 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 
-	$id = 18;
+	$id = $group_id;
 
-	$str_query = "SELECT u.id AS user_id, u.first_name, u.last_name, g.*
+
+	$str_query = "SELECT u.id AS user_id, u.first_name, u.last_name, u.user_image, g.*
 					FROM group_members g
 					INNER JOIN users u
 					ON g.user_id = u.id
-					WHERE g.group_id = $id";
+					WHERE g.group_id = $group_id";
 
 
 
@@ -37,6 +38,7 @@ if (isset($_POST)) {
 				$group_info['user_id'] = $group_members->user_id;
 				$group_info['first_name'] = $group_members->first_name;
 				$group_info['last_name'] = $group_members->last_name;
+				$group_info['user_image'] = $group_members->user_image;
 				
 				array_push($status['group_members'], $group_info);
 			}

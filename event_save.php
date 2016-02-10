@@ -23,13 +23,16 @@ if (isset($_POST)) {
 	$start_date = $_POST['start_date'];
 	$end_date = $_POST['end_date'];
 
+	$lattitude = $_POST['lattitude'];
+	$longtitude = $_POST['longtitude'];
+
 	$random_key = generateRandomKey(10);
 
 
 	$str_query = 	"INSERT INTO events 
-					(event_name, event_type, pass_key, details, location, start_date, end_date, posted_date, posted_by, posted_by_type, avail_status, active_flag)
+					(event_name, event_type, pass_key, details, location, lattitude, longtitude, start_date, end_date, posted_date, posted_by, posted_by_type, avail_status, active_flag)
 					VALUES 
-					('$event_name', '$event_type', '$random_key', '$details', '$location', '$start_date', '$end_date', NOW(), $user_id, 'U', 'A', 'A');";
+					('$event_name', '$event_type', '$random_key', '$details', '$location', '$lattitude', '$longtitude', '$start_date', '$end_date', NOW(), $user_id, 'U', 'A', 'A');";
 
 	if ($result = $con->query($str_query)) {
 		$status['status'] = "1";

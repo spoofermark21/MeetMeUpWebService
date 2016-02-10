@@ -21,7 +21,7 @@ if (isset($_POST)) {
 						LEFT JOIN users u
 					ON u.id = n.from_id
 					WHERE user_id = $user_id AND view_flag = 'N'
-					GROUP BY user_id,from_id, post_comment_id
+					GROUP BY n.details
 					ORDER BY date_notified DESC";
 
 	if ($result = $con->query($str_query)) {

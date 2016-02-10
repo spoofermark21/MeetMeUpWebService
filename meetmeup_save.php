@@ -21,13 +21,15 @@ if (isset($_POST)) {
 	$start_age = $_POST['start_age'];
 	$end_age = $_POST['end_age'];
 	$gender = $_POST['gender'];
+	$lattitude = $_POST['lattitude'];
+	$longtitude = $_POST['longtitude'];
 
 	$random_key = generateRandomKey(10);
 
 	$str_query = 	"INSERT INTO meetups 
-					(pass_key, posted_by, subject, details, location, posted_date, pref_start_age, pref_end_age, pref_gender, avail_status, active_flag)
+					(lattitude, longtitude, pass_key, posted_by, subject, details, location, posted_date, pref_start_age, pref_end_age, pref_gender, avail_status, active_flag)
 					VALUES
-					('$random_key', $user_id, '$subject', '$details','$location', NOW(), $start_age, $end_age, '$gender', 'A', 'A')";
+					('$lattitude','$longtitude','$random_key', $user_id, '$subject', '$details','$location', NOW(), $start_age, $end_age, '$gender', 'A', 'A')";
 
 
 	if ($result = $con->query($str_query)) {

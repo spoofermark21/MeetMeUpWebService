@@ -16,10 +16,10 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 	$user_id = $_POST['user_id'];	
-	$post_comment_id = $_POST['post_comment_id'];
-	$post_type = $_POST['post_type'];
+	$group_id = $_POST['group_id'];
 
-	$str_query = "UPDATE attendees SET collaboration_status = 'Y', accepted_date = NOW() WHERE user_id = $user_id AND post_id = $post_comment_id AND post_type = '$post_type'";
+	$str_query = "UPDATE group_members SET collaboration_status = 'A', accepted_date = NOW()
+						WHERE group_id = $group_id AND user_id = $user_id";
 
 	if ($result = $con->query($str_query)) {
 			$status['status'] = "1";

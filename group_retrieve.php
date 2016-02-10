@@ -19,18 +19,40 @@ if (isset($_POST)) {
 	$str_query = "";
 
 	if($query_type == 'all') {
-		$str_query = "SELECT g.* 
-				FROM groups g
-				WHERE g.created_by = $id AND g.active_flag = 'A'";
+		$str_query = "SELECT * FROM (
+						SELECT CONCAT(u.first_name, ' ', u.last_name) created_by_user, g.*
+						FROM groups g
+						LEFT JOIN users u
+						ON  u.id = g.created_by
+						WHERE g.created_by = $id AND g.active_flag = 'A'
+
+						UNION 
+
+						SELECT CONCAT(u.first_name, ' ', u.last_name) created_by_user, g.*
+						FROM  groups g
+							LEFT JOIN group_members gm
+						ON gm.group_id = g.id
+							LEFT JOIN users u
+						ON  u.id = g.created_by
+						WHERE gm.user_id = $id AND g.created_by <> $id AND g.active_flag = 'A' 
+					) k";
 	} else if ($query_type == 'individual') {
 		$str_query = "SELECT g.* 
 				FROM groups g
 				WHERE g.id = $id";
 	} else if ($query_type == 'newsfeed') {
-		$str_query = "SELECT g.* 
+		$str_query = "SELECT g.*, CONCAT(u.first_name, ' ', u.last_name) created_by_user, u.user_image,  TIMEDIFF(NOW(),g.created_date) AS 'time_diff'
 				FROM groups g
+				LEFT JOIN users u
+				ON u.id = g.created_by
 				WHERE g.active_flag = 'A'
 				LIMIT 10";
+	} else if ($query_type == 'individual_join_user') {
+		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) created_by_user, u.user_image, g.*
+						FROM groups g
+						LEFT JOIN users u
+						ON  u.id = g.created_by
+						WHERE g.id = $id";
 	}
 	
 	if ($result = $con->query($str_query)) {
@@ -52,6 +74,21 @@ if (isset($_POST)) {
 				$group_info['avail_flag'] = $group->avail_flag;
 				$group_info['active_flag'] = $group->active_flag;
 				$group_info['group_image'] = $group->group_image;
+
+				if($query_type == 'all') {
+					$group_info['created_by_user'] = $group->created_by_user;
+				}
+				
+				if($query_type == 'newsfeed') {
+					$group_info['created_by_user'] = $group->created_by_user;
+					$group_info['user_image'] = $group->user_image;
+					$group_info['time_diff'] = $group->time_diff;
+				}
+
+				if($query_type == 'individual_join_user') {
+					$group_info['created_by_user'] = $group->created_by_user;
+					$group_info['user_image'] = $group->user_image;
+				}
 
 				$query_members = "SELECT u.id AS user_id, u.first_name, u.last_name, g.*
 									FROM group_members g

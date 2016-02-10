@@ -25,7 +25,7 @@ if (isset($_POST)) {
 						FROM meetups m
 						LEFT JOIN users u
 						ON  u.id = m.posted_by
-						WHERE m.posted_by = $user_id AND m.active_flag = 'A'
+						WHERE m.posted_by = $user_id AND m.active_flag = 'A' 
 
 						UNION 
 
@@ -35,7 +35,7 @@ if (isset($_POST)) {
 						ON a.post_id = m.id
 							LEFT JOIN users u
 						ON  u.id = m.posted_by
-						WHERE a.user_id = $user_id AND posted_by <> $user_id AND m.active_flag = 'A' AND a.collaboration_status = 'Y'
+						WHERE a.user_id = $user_id AND posted_by <> $user_id AND m.active_flag = 'A' AND a.collaboration_status = 'Y' AND a.post_type = 'M'
 					) k";
 	} else if ($query_type == 'individual') {
 		$str_query = "SELECT m.*
@@ -43,7 +43,7 @@ if (isset($_POST)) {
 					WHERE m.id = $id";
 	} else if ($query_type == 'newsfeed') {
 		$user_id = $_POST['user_id'];
-		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, m.*
+		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, u.user_image, TIMEDIFF(NOW(),m.posted_date) as 'time_diff', m.*
 						FROM meetups m
 						LEFT JOIN users u
 						ON  u.id = m.posted_by
@@ -81,7 +81,15 @@ if (isset($_POST)) {
 					$query_type == 'newsfeed' || $query_type == 'all') {
 					$meetups_info['posted_by_user'] = $meetups->posted_by_user;
 				}
+
+				if($query_type == 'newsfeed') {
+					$meetups_info['user_image'] = $meetups->user_image;
+					$meetups_info['time_diff'] = $meetups->time_diff;
+				}
 				
+				$meetups_info['lattitude'] = $meetups->lattitude;
+				$meetups_info['longtitude'] = $meetups->longtitude;
+
 				$meetups_info['subject'] = $meetups->subject;
 				$meetups_info['details'] = $meetups->details;
 				$meetups_info['location'] = $meetups->location;

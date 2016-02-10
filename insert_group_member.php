@@ -15,16 +15,16 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 	$user_id = $_POST['user_id'];
-	$post_id = $_POST['post_id'];
-	$post_type = $_POST['post_type'];
-	$collaboration_status = $_POST['collaboration_status'];
-	$request_date = $_POST['request_date'];
+	$group_id = $_POST['group_id'];
 
-	$str_query = "SELECT * FROM attendees WHERE user_id = $user_id AND post_id = $post_id AND post_type='$post_type'";
+	$str_query = "SELECT *
+						FROM group_members
+						WHERE group_id = $group_id AND user_id = $user_id";
 
 	if($result = $con->query($str_query)) {
 		if($result->num_rows < 1) {
-			$str_query = "INSERT INTO attendees (post_id, post_type, user_id, collaboration_status, request_date) VALUES ($post_id, '$post_type', $user_id, '$collaboration_status', $request_date);";
+			$str_query = "INSERT INTO group_members (group_id, user_id, collaboration_status, request_date)
+							VALUES ($group_id,$user_id,'D', NOW())";
 
 			if ($result = $con->query($str_query)) {
 				$status['status'] = "1";

@@ -23,9 +23,11 @@ if (isset($_POST)) {
 	$user_id = $_POST['user_id'];
 
 	if($type == 'current_user') {
-		$str_query = 	"SELECT *
-							FROM users
-							WHERE id = $user_id";
+		$str_query = 	"SELECT * 
+						FROM users u
+						LEFT JOIN location l
+						ON l.id = u.current_location
+						WHERE u.id = $user_id";
 	} else if ($type == 'friend_user') {
 		$str_query = "";
 	}
@@ -49,6 +51,8 @@ if (isset($_POST)) {
 				$user_info['natio_id'] = $user->natio_id;
 				$user_info['gender'] = $user->gender;
 				$user_info['current_location'] = $user->current_location;
+				$user_info['location'] = $user->location;				
+
 				$user_info['email_address'] = $user->email_address;
 				$user_info['contact_number'] = $user->contact_number;
 				$user_info['privacy_flag'] = $user->privacy_flag;
