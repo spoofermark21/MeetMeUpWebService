@@ -20,7 +20,7 @@ if (isset($_POST)) {
 	$str_query = "SELECT c.*, concat(u.first_name, ' ', u.last_name) user, u.user_image
 					FROM comments c
 					LEFT JOIN users u
-					ON u.id = c.user_id  WHERE post_id = $post_id AND post_type = '$type'
+					ON u.id = c.user_id  WHERE c.post_id = $post_id AND c.post_type = '$type' AND c.active_flag = 'A'
 					ORDER BY comment_date";
 	
 	if ($result = $con->query($str_query)) {
