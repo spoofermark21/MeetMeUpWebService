@@ -12,16 +12,13 @@ if (isset($_POST)) {
 	$db = new Database();
 	$con = $db->connect();
 
-
-	$id = $group_id;
-
-
-	$str_query = "SELECT u.id AS user_id, u.first_name, u.last_name, u.user_image, g.*
+	$group_id = $_POST["group_id"];
+	
+	$str_query = "SELECT u.id AS id_user, u.first_name, u.last_name, u.user_image, g.*
 					FROM group_members g
 					INNER JOIN users u
 					ON g.user_id = u.id
 					WHERE g.group_id = $group_id";
-
 
 
 	if ($result = $con->query($str_query)) {
@@ -35,7 +32,7 @@ if (isset($_POST)) {
 			while ($group_members = $result->fetch_object()) {
 				$group_info = array();
 
-				$group_info['user_id'] = $group_members->user_id;
+				$group_info['id_user'] = $group_members->id_user;
 				$group_info['first_name'] = $group_members->first_name;
 				$group_info['last_name'] = $group_members->last_name;
 				$group_info['user_image'] = $group_members->user_image;

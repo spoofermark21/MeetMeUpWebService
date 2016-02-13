@@ -48,7 +48,7 @@ if (isset($_POST)) {
 						LEFT JOIN users u
 						ON  u.id = m.posted_by
 						WHERE m.active_flag = 'A' AND m.posted_by <> $user_id
-						ORDER BY m.posted_by DESC
+						ORDER BY m.posted_date DESC
 						/*AND m.pref_start_age <= u.pref_start_age
 								AND m.pref_end_age >= u.pref_end_age
 								AND m.pref_gender = u.pref_gender*/

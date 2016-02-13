@@ -41,7 +41,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 	$natio_id = $_POST['natio_id'];
 	$file_name = $_POST['file_name'];
 	*/
-	$str_query = "SELECT * FROM users WHERE username = '$user->username'";
+	$str_query = "SELECT * FROM users WHERE username = '$username'";
 
 	if ($result = $con->query($str_query)) {
 		

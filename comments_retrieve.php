@@ -17,7 +17,7 @@ if (isset($_POST)) {
 	$post_id = $_POST['post_id'];
 	$type = $_POST['type'];
 
-	$str_query = "SELECT c.*, concat(u.first_name, ' ', u.last_name) user
+	$str_query = "SELECT c.*, concat(u.first_name, ' ', u.last_name) user, u.user_image
 					FROM comments c
 					LEFT JOIN users u
 					ON u.id = c.user_id  WHERE post_id = $post_id AND post_type = '$type'
@@ -34,6 +34,7 @@ if (isset($_POST)) {
 				$comments_info = array();
 
 				$comments_info['id'] = $record->id;
+				$comments_info['user_image'] = $record->user_image;
 				$comments_info['post_id'] = $record->post_id;
 				$comments_info['post_type'] = $record->post_type;
 				$comments_info['user_id'] = $record->user_id;

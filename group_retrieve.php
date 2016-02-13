@@ -34,7 +34,7 @@ if (isset($_POST)) {
 						ON gm.group_id = g.id
 							LEFT JOIN users u
 						ON  u.id = g.created_by
-						WHERE gm.user_id = $id AND g.created_by <> $id AND g.active_flag = 'A' 
+						WHERE gm.user_id = $id AND g.created_by <> $id AND g.active_flag = 'A' AND gm.collaboration_status = 'A' 
 					) k";
 	} else if ($query_type == 'individual') {
 		$str_query = "SELECT g.* 
@@ -46,7 +46,8 @@ if (isset($_POST)) {
 				LEFT JOIN users u
 				ON u.id = g.created_by
 				WHERE g.active_flag = 'A'
-				LIMIT 10";
+				ORDER BY g.created_date DESC
+				";
 	} else if ($query_type == 'individual_join_user') {
 		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) created_by_user, u.user_image, g.*
 						FROM groups g

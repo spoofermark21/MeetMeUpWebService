@@ -12,8 +12,8 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 	$db = new Database();
 	$con = $db->connect();
 
-	$username = $_POST['username'];
-	$password = $_POST['password'];
+	$username = mysql_escape_string($_POST['username']);
+	$password = mysql_escape_string($_POST['password']);
 	$type_login = $_POST['type_login'];
 	
 	//for testing
@@ -24,7 +24,7 @@ if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['type
 */
 	$str_query = 	"SELECT *
 					FROM users
-					WHERE username = '$username' AND password = '$password'";
+					WHERE username = '$username' AND password = '$password' AND active_flag='A'";
 
 	if ($result = $con->query($str_query)) {
 

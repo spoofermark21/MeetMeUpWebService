@@ -13,14 +13,16 @@ if (isset($_POST)) {
 	$con = $db->connect();
 
 
-	$str_query = 	"SELECT *
-					FROM users";
+	/*$str_query = 	"SELECT *
+					FROM users";*/
 
 	//$type = $_POST['user_info'];
 	//$user_id = $_POST['user_id'];
 
 	$type = $_POST['type'];
 	$user_id = $_POST['user_id'];
+
+	$str_query = "";
 
 	if($type == 'current_user') {
 		$str_query = 	"SELECT * 
@@ -63,13 +65,7 @@ if (isset($_POST)) {
 				$user_info['active_flag'] = $user->active_flag;
 				$user_info['user_image'] = $user->user_image;
 				$user_info['date_registered'] = $user->date_registered;
-				/*
-				$user->id, $user->first_name, $user->last_name,
-					$user->bdate, $user->natio_id, $user->gender, $user->current_location,
-					$user->email_address, $user->contact_number, $user->privacy_flag,
-					$user->pref_start_age, $user->pref_end_age, $user->pref_gender,
-					$user->pref_location, $user->active_flag, $user->user_image,
-					$user->date_registered); */
+
 				array_push($status['user'], $user_info);
 			}
 		} else {

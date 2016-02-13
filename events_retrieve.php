@@ -45,7 +45,7 @@ if (isset($_POST)) {
 						LEFT JOIN users u
 						ON  u.id = e.posted_by
 						WHERE e.active_flag = 'A' AND e.posted_by <> $user_id
-						ORDER BY e.posted_by DESC
+						ORDER BY e.posted_date DESC
 						LIMIT 10";
 	} else if ($query_type == 'individual_join_user') {
 		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, e.*
