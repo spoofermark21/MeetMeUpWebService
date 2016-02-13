@@ -37,6 +37,7 @@ if (isset($_POST)) {
 				$attendees_info['first_name'] = $attendees->first_name;
 				$attendees_info['last_name'] = $attendees->last_name;
 				$attendees_info['user_image'] = $attendees->user_image;
+				$attendees_info['post_id'] = $attendees->post_id;
 				
 				array_push($status['attendees'], $attendees_info);
 			}

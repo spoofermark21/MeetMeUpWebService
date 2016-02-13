@@ -20,7 +20,7 @@ if (isset($_POST)) {
 	$str_query = "";
 
 	if($query_type == 'view') {
-		$str_query = "SELECT * FROM attendees WHERE post_type = '$type' AND collaboration_status = 'N' AND user_id = $id";
+		$str_query = "SELECT * FROM attendees WHERE post_type = '$type' AND collaboration_status = 'Y' AND user_id = $id";
 	} 
 	
 	if ($result = $con->query($str_query)) {

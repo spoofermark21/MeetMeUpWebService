@@ -16,7 +16,7 @@ if (isset($_POST)) {
 	
 	$str_query = "SELECT u.id AS id_user, u.first_name, u.last_name, u.user_image, g.*
 					FROM group_members g
-					INNER JOIN users u
+					LEFT JOIN users u
 					ON g.user_id = u.id
 					WHERE g.group_id = $group_id";
 
