@@ -25,7 +25,7 @@ if (isset($_POST)) {
 	$str_query = "";
 
 	if($type == 'current_user') {
-		$str_query = 	"SELECT * 
+		$str_query = 	"SELECT u.*, l.location
 						FROM users u
 						LEFT JOIN location l
 						ON l.id = u.current_location

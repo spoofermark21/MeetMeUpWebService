@@ -24,6 +24,8 @@ if (isset($_POST)) {
 	$lattitude = $_POST['lattitude'];
 	$longtitude = $_POST['longtitude'];
 
+	//$has_preference = $_POST['has_preference'];
+
 	$random_key = generateRandomKey(10);
 
 	$str_query = 	"INSERT INTO meetups 
@@ -33,8 +35,17 @@ if (isset($_POST)) {
 
 
 	if ($result = $con->query($str_query)) {
+
 		$status['status'] = "1";
 		$status['response'] = "Successful";
+
+		/*if($has_preference == "Y") {
+
+			$values = $_POST['values'];
+
+			$str_query = "INSERT INTO preferred_nationalities (meetup_id, natio_id, natio_type)
+							VALUES $values"
+		}*/
 	} 
 
 }

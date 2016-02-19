@@ -17,7 +17,7 @@ if (isset($_POST)) {
 	$user_id = $_POST['user_id'];
 	$post_id = $_POST['post_id'];
 	$post_type = $_POST['post_type'];
-	$comment = $_POST['comment'];
+	$comment = mysql_escape_string($_POST['comment']);
 
 	$str_query = "INSERT INTO comments (post_id, post_type, user_id, COMMENT, comment_date) VALUES ($post_id,'$post_type', $user_id, '$comment', NOW())";
 

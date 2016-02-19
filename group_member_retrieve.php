@@ -18,7 +18,7 @@ if (isset($_POST)) {
 					FROM group_members g
 					LEFT JOIN users u
 					ON g.user_id = u.id
-					WHERE g.group_id = $group_id";
+					WHERE g.group_id = $group_id AND g.collaboration_status = 'A'";
 
 
 	if ($result = $con->query($str_query)) {

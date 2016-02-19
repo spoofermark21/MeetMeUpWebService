@@ -91,6 +91,8 @@ if (isset($_POST)) {
 					$events_info['posted_by_user'] = $events->posted_by_user;
 				}
 
+				$events_info['lattitude'] = $events->lattitude;
+				$events_info['longtitude'] = $events->longtitude;
 				$events_info['posted_by'] = $events->posted_by;
 				$events_info['posted_by_type'] = $events->posted_by_type;
 				$events_info['avail_status'] = $events->avail_status;

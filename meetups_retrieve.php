@@ -43,16 +43,19 @@ if (isset($_POST)) {
 					WHERE m.id = $id";
 	} else if ($query_type == 'newsfeed') {
 		$user_id = $_POST['user_id'];
+		$search = $_POST['search'];
+
 		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, u.user_image, TIMEDIFF(NOW(),m.posted_date) as 'time_diff', m.*
 						FROM meetups m
 						LEFT JOIN users u
 						ON  u.id = m.posted_by
-						WHERE m.active_flag = 'A' AND m.posted_by <> $user_id
-						ORDER BY m.posted_date DESC
+						WHERE m.active_flag = 'A' AND m.posted_by <> $user_id AND m.subject LIKE '%$search%'
+						ORDER BY m.posted_date DESC";
 						/*AND m.pref_start_age <= u.pref_start_age
 								AND m.pref_end_age >= u.pref_end_age
 								AND m.pref_gender = u.pref_gender*/
-						LIMIT 10";
+						//LIMIT 5";	
+
 	} else if ($query_type == 'invidual_join_user') {
 		$str_query = "SELECT CONCAT(u.first_name, ' ', u.last_name) posted_by_user, m.*
 						FROM meetups m
