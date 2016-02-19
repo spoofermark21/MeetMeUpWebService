@@ -54,6 +54,10 @@ if (isset($_POST)) {
 						LEFT JOIN users u
 						ON  u.id = g.created_by
 						WHERE g.id = $id";
+	} else if ($query_type == 'create_event') {
+		$str_query = "SELECT g.*
+						FROM groups g
+						WHERE g.created_by = $id";
 	}
 	
 	if ($result = $con->query($str_query)) {
